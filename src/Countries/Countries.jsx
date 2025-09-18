@@ -11,7 +11,7 @@ const Countries = ({ fetchCountries, handleVisitedCountry }) => {
       <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
         {CountriesData.map((country) => (
           <Country
-            key={country.name.official}
+            key={country.cca3.cca3}
             country={country}
             handleVisitedCountry={handleVisitedCountry}
           ></Country>
