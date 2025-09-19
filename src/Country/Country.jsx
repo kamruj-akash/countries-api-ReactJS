@@ -1,40 +1,26 @@
 import { useState } from "react";
 
-const Country = ({ country, handleVisitedCountry }) => {
+const Country = ({ country, handleCountVisited }) => {
   const [visited, setVisited] = useState(false);
-  const handleCountryVisit = () => {
-    // visited ? setVisited(false) : setVisited(true);
-    setVisited(!visited);
-    handleVisitedCountry(country);
-  };
 
+  const handleVisited = () => {
+    setVisited(!visited);
+    handleCountVisited(country.name.common);
+  };
   return (
-    <>
-      <div className="border rounded-xl overflow-hidden border-blue-400 text-center">
-        <img src={country.flags.flags.svg} alt={country.flags.flags.alt} />
-        <div className="p-2">
-          <div className="text-center my-3">
-            <h1 className="text-2xl font-semibold text-slate-100">
-              {country.name.common}
-            </h1>
-            <p className="text-sm">{country.name.official}</p>
-          </div>
-          <div>
-            <p>Capital: {country.capital.capital}</p>
-            <p>Population: {country.population.population}</p>
-          </div>
-          <button
-            type="button"
-            className={`btn py-2 px-5  rounded-xl cursor-pointer mt-3 ${
-              visited ? "bg-blue-500" : "bg-black"
-            }`}
-            onClick={handleCountryVisit}
-          >
-            {visited ? "Visited" : " Not Visited"}
-          </button>
-        </div>
-      </div>
-    </>
+    <div className="border border-blue-400 p-5 rounded-xl shadow-2xl text-center">
+      <img src={country.flags.flags.png} alt={country.flags.flags.alt} />
+      <h1>{country.name.common}</h1>
+      <h1>{country.name.official}</h1>
+      <button
+        onClick={handleVisited}
+        className={`btn py-2 px-5 rounded-xl cursor-pointer mt-3  ${
+          visited ? "bg-blue-400  " : "bg-black"
+        }`}
+      >
+        {visited ? "Visited" : "Not Visited"}
+      </button>
+    </div>
   );
 };
 

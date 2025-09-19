@@ -1,23 +1,19 @@
 import { use } from "react";
 import Country from "../Country/Country";
 
-const Countries = ({ fetchCountries, handleVisitedCountry }) => {
+const Countries = ({ fetchCountries, handleCountVisited }) => {
   const data = use(fetchCountries);
-  const CountriesData = data.countries;
+  const countries = data.countries;
 
   return (
-    <>
-      {/* <h1>Total Visited Country: {visitedCountry}</h1> */}
-      <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-        {CountriesData.map((country) => (
-          <Country
-            key={country.cca3.cca3}
-            country={country}
-            handleVisitedCountry={handleVisitedCountry}
-          ></Country>
-        ))}
-      </div>
-    </>
+    <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+      {countries.map((country) => (
+        <Country
+          handleCountVisited={handleCountVisited}
+          country={country}
+        ></Country>
+      ))}
+    </div>
   );
 };
 

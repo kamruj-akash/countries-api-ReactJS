@@ -3,20 +3,22 @@ import "./App.css";
 import Countries from "./Countries/Countries";
 import LoadingSpinner from "./LoadingSpinner";
 
-// countries
+// fetch country
 const url = "https://openapi.programming-hero.com/api/all";
-const countriesPromise = async () => {
+const FetchCountries = async () => {
   const res = await fetch(url);
   return res.json();
 };
-const fetchCountries = countriesPromise();
+const fetchCountries = FetchCountries();
+
 function App() {
-  const [visitedCountry, setVisitedCountry] = useState([]);
-  const handleVisitedCountry = (country) => {
-    const countryVisit = country.name.common;
-    const newVisitedCountry = [...visitedCountry, countryVisit];
-    setVisitedCountry(newVisitedCountry);
+  const [countVisited, setCountVisited] = useState([]);
+  const handleCountVisited = (country) => {
+    const newVisited = [...countVisited, country];
+    const uniqueArray = [...new Set(newVisited)];
+    setCountVisited(uniqueArray);
   };
+  console.log(countVisited);
 
   return (
     <>
@@ -24,12 +26,17 @@ function App() {
         All Country List
       </h1>
       <h1 className="text-2xl text-center text-blue-400 font-semibold border-b pb-2 mb-5">
-        Total Visited Country: {visitedCountry}
+        Total Country: {countVisited.length}
       </h1>
-      {/* <input type="search" className="w-28" /> */}
+      <h1 className="text-2xl text-center text-blue-400 font-semibold border-b pb-2 mb-5">
+        Total Visited Country:{" "}
+        <span className="text-emerald-600 font-bold">
+          {countVisited.map((country) => country + ", ")}
+        </span>
+      </h1>
       <Suspense fallback={<LoadingSpinner></LoadingSpinner>}>
         <Countries
-          handleVisitedCountry={handleVisitedCountry}
+          handleCountVisited={handleCountVisited}
           fetchCountries={fetchCountries}
         ></Countries>
       </Suspense>
