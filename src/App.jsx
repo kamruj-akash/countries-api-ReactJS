@@ -13,12 +13,17 @@ const fetchCountries = FetchCountries();
 
 function App() {
   const [countVisited, setCountVisited] = useState([]);
+
   const handleCountVisited = (country) => {
-    const newVisited = [...countVisited, country];
-    const uniqueArray = [...new Set(newVisited)];
-    setCountVisited(uniqueArray);
+    if (countVisited.includes(country)) {
+      let existedCountry = countVisited.filter((c) => c != country);
+      setCountVisited(existedCountry);
+    } else {
+      const newVisited = [...countVisited, country];
+      const uniqueArray = [...new Set(newVisited)];
+      setCountVisited(uniqueArray);
+    }
   };
-  console.log(countVisited);
 
   return (
     <>
