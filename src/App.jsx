@@ -34,7 +34,7 @@ function App() {
         Total Country: {countVisited.length}
       </h1>
       <h1 className="text-2xl text-center text-blue-400 font-semibold border-b pb-2 mb-5">
-        Total Visited Country:{" "}
+        Visited Country Name:{" "}
         <span className="text-emerald-600 font-bold">
           {countVisited.map((country) => country + ", ")}
         </span>
